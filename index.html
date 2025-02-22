@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAT Performance Summary</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CAT Performance Summary</h1>
+
+        <!-- Performance Table -->
+        <table id="performanceTable">
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Questions</th>
+                    <th>Attempts</th>
+                    <th>Correct</th>
+                    <th>Accuracy</th>
+                    <th>Time Spent</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Floating "Deep Insights" Button -->
+    <button id="insightsButton">Deep Insights</button>
+
+    <!-- Modal for AI-generated insights -->
+    <div id="insightsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>AI-Generated Deep Insights</h2>
+            <div id="loading" class="loading">Analyzing your performance...</div>
+            <div id="insightsContent">
+                <!-- AI-generated insights will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

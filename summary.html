@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Generated Performance Summary</title>
+    <link rel="stylesheet" href="summary.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Load jsPDF -->
+</head>
+<body>
+
+    <div class="summary-container">
+        <h1>AI-Generated Performance Summary</h1>
+        <div class="loading">Generating summary, please wait</div>
+        <div id="summaryContent"></div>
+        <button id="backButton" class="back-button">Back to Performance</button>
+        <button id="downloadPDF" class="download-button">⬇️</button>
+    </div>
+
+    <script type="module">
+        import { fetchAISummary } from "./generateSummary.js";
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const summaryContent = document.getElementById("summaryContent");
+            const loadingMessage = document.querySelector(".loading");
+            const downloadButton = document.getElementById("downloadPDF");
+            downloadButton.style.display = "none"; // Hide download button initially
+
+            try {
+                loadingMessage.style.display = "block"; // Show loading
+                summaryContent.innerHTML = "";
+
+                const summary = await fetchAISummary(); // Fetch AI summary
+                
+                if (!summary || summary.trim() === "") {
+                    summaryContent.innerHTML = `<p class='error'>No summary available.</p>`;
+                    return;
+                }
+
+                // Convert the summary into structured HTML
+                summaryContent.innerHTML = formatSummary(summary);
+            } catch (error) {
+                console.error("Error displaying summary:", error);
+                summaryContent.innerHTML = `<p class='error'>Error loading summary.</p>`;
+            } finally {
+                loadingMessage.style.display = "none"; // Hide loading
+            }
+        });
+
+        function formatSummary(summary) {
+            const lines = summary.split("\n"); // Split summary into lines
+            let formattedHTML = "";
+
+            lines.forEach(line => {
+                line = line.trim();
+
+                if (line.startsWith("**") && line.endsWith("**")) {
+                    formattedHTML += `<h2>${line.replace(/\*\*/g, '')}</h2>`; // Convert "**Heading**" to <h2>
+                } else if (line.startsWith("-")) {
+                    formattedHTML += `<li>${line.replace("- ", "")}</li>`; // Convert "- Bullet Points" to <li>
+                } else {
+                    formattedHTML += `<p>${line}</p>`; // Convert normal text to <p>
+                }
+            });
+
+            // Wrap bullet points inside <ul>
+            formattedHTML = formattedHTML.replace(/(<li>[\s\S]*?<\/li>)/g, "<ul>$1</ul>");
+
+            return formattedHTML;
+        }
+
+        // Back button functionality
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+
+        // PDF Download functionality
+        document.getElementById("downloadPDF").addEventListener("click", () => {
+            const { jsPDF } = window.jspdf; // Get jsPDF from the globally loaded script
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("AI-Generated Performance Summary", 10, 10);
+
+            const summaryText = document.getElementById("summaryContent").innerText;
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            doc.text(summaryText, 10, 20, { maxWidth: 180 });
+
+            doc.save("Performance_Summary.pdf");
+        });
+
+    </script>
+
+</body>
+</html>
