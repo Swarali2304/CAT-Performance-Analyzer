@@ -21,7 +21,6 @@ body {
     height: 670px; /* Set a fixed height for scrolling */
     overflow-y: auto; /* Enable vertical scrolling */ 
     margin: auto; 
-  
     
 }
 
@@ -46,11 +45,10 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: white;
+    background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    display: none; /* Initially hidden */
 }
 
 .download-button:hover {

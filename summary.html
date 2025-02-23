@@ -39,6 +39,7 @@
 
                 // Convert the summary into structured HTML
                 summaryContent.innerHTML = formatSummary(summary);
+                downloadButton.style.display = "block";
             } catch (error) {
                 console.error("Error displaying summary:", error);
                 summaryContent.innerHTML = `<p class='error'>Error loading summary.</p>`;
@@ -75,16 +76,17 @@
         });
 
         // PDF Download functionality
-        document.getElementById("downloadPDF").addEventListener("click", () => {
-            const { jsPDF } = window.jspdf; // Get jsPDF from the globally loaded script
+        document.getElementById("downloadPDF").addEventListener("click", async () => {
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
             doc.setFont("helvetica", "bold");
             doc.setFontSize(16);
             doc.text("AI-Generated Performance Summary", 10, 10);
 
+            // Get text content from the summary div
             const summaryText = document.getElementById("summaryContent").innerText;
-            
+
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             doc.text(summaryText, 10, 20, { maxWidth: 180 });

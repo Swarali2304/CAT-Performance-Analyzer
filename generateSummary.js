@@ -1,9 +1,14 @@
 export async function fetchAISummary() {
-    const apiKey = "AIzaSyBdVefacStwVdtzAttXKhY04B99-Ux74fw"; 
+    const apiKey = process.env.API_KEY;
+    
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
     try {
         // 🔹 Fetch performance data from `data.json`
+        if (!apiKey) {
+            console.error("API key is missing!");
+            return "Error: API key not found.";
+        }
         const response = await fetch("data.json");
         if (!response.ok) throw new Error("Failed to load performance data.");
         
@@ -32,7 +37,7 @@ export async function fetchAISummary() {
 
         - **Action Plan**: [Steps to improve, keep it short and unique, Do not quantify]
 
-        detailed, bullet-pointed analysis (dark black point) and up to the point. Also keep it easy to understand. 
+        detailed and up to the point. Also keep it easy to understand. 
         Also write a motivating quote at the end. Bold important words (meaningful phrase). Align the text properly. 
         Write atleast 3 points in each section Bold important words.
         `;
