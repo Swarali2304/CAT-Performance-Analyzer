@@ -6,6 +6,11 @@ This project fulfills the assignment requirements for developing a web-based too
 
 The tool dynamically generates a detailed, bullet-pointed analysis of CAT test performance, focusing on Accuracy, Question Selection Strategy, and Improvement Areas.  It presents performance analytics in interactive tables and provides AI-powered insights in a modal window.
 
+## Deployment
+
+The project is deployed and hosted on Vercel. You can access the live tool at: https://performance-analyzer-sepia.vercel.app/index.html
+
+
 ## Features
 
 - **Dynamic Prompt Generation:** Constructs a prompt for the Gemini AI model based on the provided JSON performance data, ensuring relevant and personalized insights.
@@ -49,34 +54,18 @@ The tool dynamically generates a detailed, bullet-pointed analysis of CAT test p
 3. **AI Summary:** Once generated, the AI summary will be displayed in the modal.  The modal is scrollable if the content is too long.
 
 
-## File Structure
 
-CAT-Performance-Analysis/
-├── index.html        # Main HTML file (Performance Table)
-├── style.css         # CSS stylesheet for index.html
-├── script.js         # JavaScript for index.html (table interactivity, Deep Insights button)
-├── summary.html      # HTML for AI summary page
-├── summary.css       # CSS stylesheet for summary.html
-├── generateSummary.js # JavaScript for AI summary generation
-├── data.json         # JSON performance data
-└── README.md         # Project README file
+## File Descriptions:
+- **`index.html`**: The main interface containing the performance table.
+- **`style.css`**: Styles for the main interface.
+- **`generateSummary.js`**: Handles communication with the Gemini API and dynamic prompt generation.
+- **`summary.html`**: Contains the HTML layout for the AI summary modal.
+- **`summary.css`**: Styles the summary modal page.
+- **`data.json`**: Contains the student’s performance data in JSON format.
+- **`README.md`**: Project documentation file.
 
 
-## Deployment
-
-The project is deployed and hosted on Vercel. You can access the live tool at: https://performance-analyzer-sepia.vercel.app/index.html
 
 
-## Submission Checklist
-
- Public GitHub repository with all code.
- Deployed and hosted on Vercel.
- Dynamic prompt generation.
- Detailed AI summary covering required aspects.
- Interactive performance tables.
- Floating "Deep Insights" button.
- Modal display with loading animation and scrollbar.
- Error handling.
- Clean, modular, and well-documented code.
 
 
