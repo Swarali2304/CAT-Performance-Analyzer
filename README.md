@@ -8,7 +8,7 @@ The tool dynamically generates a detailed, bullet-pointed analysis of CAT test p
 
 ## Deployment
 
-The project is deployed and hosted on Vercel. You can access the live tool at: https://performance-analyzer-sepia.vercel.app/index.html
+The project is deployed and hosted on Vercel. You can access the live tool at: https://catperformanceanalyzer.vercel.app/
 
 
 ## Features
